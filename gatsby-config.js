@@ -1,6 +1,10 @@
+require("dotenv").config({
+  path: `.env`,
+})
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `eZ Platform GraphQL pulled by Gatsby`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
   },
@@ -25,6 +29,17 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        // This type will contain remote schema Query type
+        typeName: "DomainGroupNetgen",
+        // This is field under which it's accessible
+        fieldName: "ezRepository",
+        // Url to query from
+        url: process.env.GATSBY_GRAPHQL_URL
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
